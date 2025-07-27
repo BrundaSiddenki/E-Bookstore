@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>E-Bookstore - Your Next Great Read Awaits!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Deeper, more vibrant background gradient */
+            background: linear-gradient(135deg, #f0f2f5 0%, #c9d6df 100%);
+            margin: 0;
+            padding: 0;
+            color: #343a40;
+            overflow-x: hidden; /* Prevent horizontal scroll on some effects */
+        }
+
+        .navbar {
+            /* Richer, more defined navbar gradient */
+            background: linear-gradient(90deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+            padding: 18px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+            position: sticky; /* Make navbar sticky */
+            top: 0;
+            z-index: 1000; /* Ensure it stays on top */
+            animation: fadeInDown 0.8s ease-out; /* Navbar animation */
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out; /* Smoother transitions */
+            position: relative;
+            overflow: hidden;
+            padding: 5px 0; /* Add padding for underline effect */
+        }
+
+        .navbar a:hover {
+            color: #ffeb3b; /* Brighter hover color */
+            transform: translateY(-3px) scale(1.05); /* More pronounced lift and slight scale */
+            text-shadow: 0 0 10px rgba(255, 235, 59, 0.6); /* Text glow on hover */
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 3px;
+            background: #ffeb3b; /* Underline color */
+            transform: scaleX(0); /* Start hidden */
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .navbar a:hover::after {
+            transform: scaleX(1); /* Expand on hover */
+            transform-origin: bottom left;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 25px;
+            text-align: center;
+            background: linear-gradient(180deg, #ffffff 0%, #f0f8ff 100%); /* Subtle gradient for container */
+            border-radius: 18px; /* More rounded corners */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Stronger, softer shadow */
+            animation: fadeInUp 1s ease-out; /* Container animation */
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #0056b3;
+            font-size: 48px; /* Larger heading */
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Text shadow for depth */
+            position: relative; /* For pseudo-element line */
+            padding-bottom: 10px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #007bff, #00c6ff); /* Gradient underline */
+            border-radius: 2px;
+        }
+
+        .search-box {
+            margin: 30px auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* More space */
+        }
+
+        input[type="text"] {
+            padding: 14px 20px; /* More padding */
+            width: 400px; /* Wider */
+            border: 2px solid #a3b1c6; /* Slightly thicker, softer border */
+            border-radius: 30px; /* Even more rounded */
+            font-size: 18px;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.08); /* Inner shadow */
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.35), inset 0 2px 8px rgba(0, 0, 0, 0.12); /* Brighter shadow on focus */
+            transform: scale(1.01); /* Slight zoom on focus */
+        }
+
+        .btn {
+            padding: 14px 30px;
+            background: linear-gradient(45deg, #1dd3b0 0%, #007bff 100%); /* Dynamic gradient */
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Bouncier transition */
+            margin-top: 0;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Button shadow */
+            text-transform: uppercase; /* Uppercase text for buttons */
+            letter-spacing: 0.8px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #007bff 0%, #1dd3b0 100%); /* Reverse gradient on hover */
+            transform: translateY(-4px) scale(1.02); /* More lift and slight scale */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); /* Enhanced shadow on hover */
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #007bff 0%, #00c6ff 100%); /* Vibrant blue for primary */
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #00c6ff 0%, #007bff 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #ff9933 0%, #ffc107 100%); /* Warm orange for wishlist */
+            color: #4a4a4a; /* Darker text */
+        }
+        .btn-warning:hover {
+            background: linear-gradient(45deg, #ffc107 0%, #ff9933 100%);
+            color: white; /* White text on hover for contrast */
+        }
+
+        .book-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 35px; /* Even more gap */
+            margin-top: 50px; /* More space from search */
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 20px; /* Very rounded corners */
+            box-shadow: 0 18px 45px rgba(0,0,0,0.12); /* Deep, soft shadow */
+            width: 300px; /* Wider cards */
+            padding: 30px; /* More internal padding */
+            text-align: left;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother animation */
+            border: 1px solid #e0e0e0; /* Subtle border */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden; /* For pseudo-element background */
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%); /* Fading white overlay */
+            z-index: 1;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0; /* Hidden by default */
+        }
+
+        .book-card:hover::before {
+            opacity: 1; /* Show on hover */
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 100%); /* Lighter overlay on hover */
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px) rotateZ(-1deg); /* Slight tilt for playful effect */
+            box-shadow: 0 25px 55px rgba(0,0,0,0.2); /* Even deeper shadow */
+        }
+
+        .book-card h3 {
+            color: #0056b3;
+            font-size: 24px; /* Larger title */
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+            z-index: 2; /* Bring text above pseudo-element */
+            position: relative;
+        }
+
+        .book-card p {
+            font-size: 16px; /* Slightly larger text */
+            color: #6c757d;
+            margin: 8px 0; /* More spacing */
+            line-height: 1.7;
+            z-index: 2;
+            position: relative;
+        }
+
+        .price {
+            color: #28a745;
+            font-weight: 700;
+            font-size: 20px; /* Larger price */
+            margin-top: 20px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            z-index: 2;
+            position: relative;
+        }
+
+        .book-card .btn {
+            width: calc(100% - 20px); /* Account for internal padding */
+            margin-top: 18px;
+            z-index: 2;
+            position: relative;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .book-card .btn + .btn {
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div><strong>📚 E-Bookstore</strong></div>
+        <div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'wishlist' %}">Wishlist</a>
+                <a href="{% url 'order_history' %}">Orders</a>
+                <a href="{% url 'view_cart' %}">Cart</a>
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+                <a href="{% url 'checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Discover Your Next Great Read!</h1>
+        <p style="font-size: 1.3em; color: #6c757d; margin-top: -5px; margin-bottom: 35px; font-weight: 300;">Dive into a curated collection of knowledge and imagination.</p>
+        <form method="GET" action="{% url 'home' %}" class="search-box">
+            <input type="text" name="q" placeholder="Search by title, author, or keyword..." value="{{ request.GET.q }}">
+            <button type="submit" class="btn">🔍 Search Books</button>
+        </form>
+
+        <div class="book-grid">
+            {% for book in books %}
+            <div class="book-card">
+                <div>
+                    <h3>{{ book.title }}</h3>
+                    <p><strong>Author:</strong> {{ book.author }}</p>
+                    <p>{{ book.description|truncatewords:25 }}</p>
+                </div>
+                <div>
+                    <p class="price">Price: ₹{{ book.price }}</p>
+                    <a href="{% url 'add_to_cart' book.id %}" class="btn">🛒 Add to Cart</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'add_to_wishlist' book.id %}" class="btn btn-warning">❤️ Add to Wishlist</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

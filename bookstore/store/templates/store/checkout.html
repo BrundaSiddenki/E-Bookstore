@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - E-Bookstore</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #80deea);
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            overflow: hidden;
+        }
+        .left, .right {
+            padding: 30px;
+        }
+        .left {
+            flex: 2;
+            border-right: 1px solid #eee;
+        }
+        .right {
+            flex: 1;
+            background-color: #f7f7f7;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #00796b;
+        }
+        form label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .summary ul {
+            list-style: none;
+            padding: 0;
+        }
+        .summary li {
+            margin-bottom: 10px;
+        }
+        .total {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #00796b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left">
+        <h2>📦 Shipping Details</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Place Order</button>
+        </form>
+    </div>
+    <div class="right">
+        <h2>🛒 Your Cart</h2>
+        <div class="summary">
+            <ul>
+                {% for item in cart_items %}
+                    <li>{{ item.book.title }} × {{ item.quantity }} — ₹{{ item.total_price }}</li>
+                {% endfor %}
+            </ul>
+            <div class="total">Total: ₹{{ total }}</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

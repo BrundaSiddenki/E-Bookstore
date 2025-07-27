@@ -1,0 +1,13 @@
+<h2>Search Results for "{{ query }}"</h2>
+
+{% if results %}
+    {% for book in results %}
+        <div>
+            <h3>{{ book.title }}</h3>
+            <p>Author: {{ book.author }}</p>
+            <p>Price: ₹{{ book.price }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No books found.</p>
+{% endif %}
